@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- please use GB2312 NOT UTF-8 9304893@qq.com        -->
+<!-- gb2312 模式下请误引用中文名文件 -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="js/lib/jquery-ui.js"></script>
+    <script src="js/lib/cropper.js"></script>
+    <script src="js/lib/echarts.js"></script>
+    <script src="js/lib/moment.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-switch/4.0.0-alpha.1/js/bootstrap-switch.js"></script>
+    <script type="text/javascript" src="js/lib/heatmap.min.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/cropper.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://cdn.bootcss.com/bootstrap-switch/4.0.0-alpha.1/css/bootstrap-switch.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,  minimum-scale=0.3, initial-scale=1.0 " />
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    
+    <title> </title>
+    <style>
+    #a{
+        margin-top: 5px;
+    }
+    </style>
+</head>
+
+<body onload="load();" style="margin:0px">
+    <div id="content_loading">
+        <div style="position: absolute; top: 133px; width: 100%">
+            <div id="loading" style="font-size: 12px; border: solid 1px #4F4F4F; background-color: #5B5B5B; color: white; height: 30px; margin-left: auto; margin-right: auto; width: 200px; text-align: center; vertical-align: middle; line-height: 30px; z-index: 10; -moz-border-radius: 5px;">正在加载,请稍候......</div>
+        </div>
+    </div>
+    <div id="box1">
+        <span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;搜索内容:</span>
+        <input type="text" id="search" value="捷达" class="form-control">
+        <button onclick="urlChange()" class="btn btn-default btn-sm " id="searchbtn">搜索</button>
+        是否启用转换:
+                <input type="checkbox" id="convCheckBox" name="my-checkbox">
+        <br>
+        <span style=" margin-top: 5px;">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAX值:</span>
+        <span id="maxValue"></span>
+        <input type="range" id="max" min="10" max="1000" value="150" onchange="maxValue()">
+        <br>
+        <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SIZE值:</span>
+        <input type="text" id="size" value="10000" class="form-control">
+        <!-- |||||| -->
+        <span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开始时间:</span>
+        <input type="date" id="begin" class="form-control">
+        <span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 结束时间:</span>
+        <input type="date" id="end" class="form-control">
+        <br>
+        <span id="pfSpan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平台选择</span>
+        <div class="boximg">
+            <img src="img/PC.png" alt="" id="pc" >
+            <img src="img/phone.png" alt="" id="phone">
+            <img src="img/app.png" alt="" id="app">
+        </div>
+             <div id="S_change">
+            <img src="img/area.png" alt="" id="S_changeImg">
+            <span> 圈选</span>
+        </div>
+        <div id="S_Mode">
+            <img src="img/bar.png" alt="" id="S_changeImg">
+            <span>统计</span>
+        </div>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iframe设置宽高:</span>
+        <br>
+        <span id="spanWidth">宽</span>
+         <input type="text" id="iframeWidth" class="form-control">
+         <span id="spanHeight">高</span>
+        <input type="text" id="iframeHeight" class="form-control">
+        <button id="setButton" class="btn btn-default btn-sm " onclick="set()">设置</button>
+        <!-- |||||| -->
+    </div>   
+    <div id="box4">
+        <div id="main" style="width: 600px;height:400px"></div>
+    </div>
+    <div id="content">
+        <iframe onload="" onreadystatechange="hideLoading();" id="content_frame" name="content_frame" src="" scrolling="yes" frameborder="0"
+            width="100%"></iframe>
+    </div>
+    <div id="vis_info">
+    </div>
+    <h1 id="title">可视化分析平台</h1>
+    <img src="img/logo.png" id="logo" alt="">
+    <div id="buttons">
+        <button onclick="S_search()" class="btn btn-default btn-sm ">工具栏</button>     
+    </div>
+    <script src="js/index.js"></script>
+    <script src="js/echartindex.js"></script>
+    <script src="js/change.js"></script>
+</body>
+</html>

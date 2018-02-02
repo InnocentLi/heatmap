@@ -1,0 +1,364 @@
+html,
+body {
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+span{
+    margin: 2px;
+}
+input{
+    margin-top: 5px;
+    margin-left: 30px;
+    width: 200px;
+}
+
+button{
+    margin-left: 3px;
+}
+
+
+.cropper-container	{
+   position: absolute;
+   top:40px;   
+}
+
+#buttons {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#div1 {
+    color: white;
+    width: 300px;
+    height: 300px;
+    background-color: #ccc;
+    position: absolute;
+}
+
+#box1 {
+    color: white;
+    display: block;
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    width: 300px;
+    height: 100%;
+    opacity: 0.7;
+    background-color: black;
+    z-index: 100;
+}
+
+#box2 {
+    color: white;
+    display: none;
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    width: 500px;
+    height: 222px;
+    opacity: 0.7;
+    background-color: black;
+    z-index: 100;
+}
+
+#box3 {
+    color: white;
+    display: none;
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    width: 500px;
+    height: 222px;
+    opacity: 0.7;
+    background-color: black;
+    z-index: 100;
+}
+
+#box3 {
+    color: white;
+    display: none;
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    width: 500px;
+    height: 222px;
+    opacity: 0.7;
+    background-color: black;
+    z-index: 100;
+}
+
+#box4 {
+    color: white;
+    display: none;
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    width: 600px;
+    height: 440px;
+    opacity: 0.7;
+    background-color: black;
+    z-index: 100;
+}
+
+
+/* 下方导航条 */
+
+#vis_info {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #75b9e6;
+    text-align: center;
+    line-height: 38px;
+    color: #fff;
+    z-index: 200;
+    
+}
+
+#title{
+    position: fixed;
+    z-index: 202;
+    color:white;
+    font-size: 29px;
+    line-height: 0px;
+    top: 0px;
+    left: 50px;
+}
+/* button的父级 */
+
+#buttons {
+    position: fixed;
+    width: 300px;
+    height: 30px;
+    top: 0px;
+    right: 10px;
+    z-index: 201;
+}
+
+#dragbox {
+    top: 114px;
+    left: 452px;
+    border: 3px dashed black;
+    display: none;
+    background-color: #fff;
+    position: absolute;
+    /* margin-left: 200px; */
+    opacity: 0.2;
+    cursor: move;
+}
+
+.hbox {
+    position: absolute;
+    background: black;
+    opacity: 0.7;
+}
+
+#triangle1 {
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    margin-left: -10px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid black;
+    border-left: 8px solid transparent;
+}
+
+#triangle2 {
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    margin-left: -10px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid black;
+    border-left: 8px solid transparent;
+}
+
+#triangle3 {
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    margin-left: -10px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid black;
+    border-left: 8px solid transparent;
+}
+
+#triangle4 {
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    margin-left: -10px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid black;
+    border-left: 8px solid transparent;
+}
+
+#content_frame {
+    height: 5000px;
+}
+
+#logo {
+    position: fixed;
+    display: block;
+    height: 36px;
+    z-index: 1000;
+    bottom: 2px;
+    margin-left: 10px;
+    margin-top: 2px;
+    left: 10px;
+}
+ 
+.box1ImgBeforeInput{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.boximg img{
+    width: 50px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    margin-left: 28px;
+    padding: 5px;
+    border: 1px solid white;
+    opacity: 1;
+    cursor: pointer;
+}
+
+iframe {
+    margin-top: 40px;
+}
+
+canvas {
+    margin-top: 40px;
+}
+
+#search{
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#size{
+    width: 200px;
+}
+
+#searchbtn{
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+#max{
+    width: 200px;
+}
+
+#search2{
+    margin-left: 30px;
+}
+
+#closeImg{
+    opacity: 1;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: 3px;
+    top: 3px;
+    cursor: pointer;
+}
+
+
+#begin{
+    width: 200px;
+}
+
+#end{
+    width: 200px;
+}
+
+#convCheckBox{
+    display: block;
+    /* margin: 0; */
+    margin-top: -28px;
+    margin-left: 178px
+}
+
+#S_change{
+    cursor: pointer;
+    margin-left: 26px;
+    margin-top: 3px;
+    width: 98px;
+    height: 35px;
+    border: 1px solid white;
+    border-radius: 7px;
+    font-size:15px;
+    line-height: 31px;
+}
+#S_changeImg{
+    height: 26px;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+#S_Mode{
+    cursor: pointer;
+    margin-left: 145px;
+    margin-top: -35px;
+    width: 98px;
+    height: 35px;
+    border: 1px solid white;
+    border-radius: 7px;
+    font-size: 15px;
+    line-height: 31px;
+}
+
+
+#pfSpan{
+    display: block;
+    margin-top: -13px;
+    margin-bottom: -5px;
+}
+
+#iframeWidth{
+    margin-left: 50px;
+    width: 70px;
+    height: 20px;
+    margin-top: -20px
+}
+
+#iframeHeight{
+    height: 20px;
+    margin-left: 153px;
+    margin-top: -20px;
+    width: 70px;
+}
+
+#spanWidth{
+    display: block;
+    margin-left: 26px;
+}
+#spanHeight{
+    display: block;
+    margin-left: 129px;
+    margin-top: -21px;
+}
+#setButton{
+    margin-left: 238px;
+    margin-top: -26px;
+    width: 44px;
+    height: 30px;
+}
+
+
+
+
+
+#heatmap-canvas{
+    max-width: 100%;
+}
