@@ -1,5 +1,5 @@
 // please use GB2312 NOT UTF-8   9304893@qq.com
-// urlÈ¡Öµ  
+// urlå–å€¼  
 SizeChange();
 function getValue(parm) {
     var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
@@ -7,10 +7,10 @@ function getValue(parm) {
     if (r != null) return r[2];
     return null;
 }
-//¼ÇÂ¼·½¿éÎ»ÖÃ
+//è®°å½•æ–¹å—ä½ç½®
 // url 
 var request = {
-    q: decodeURI(getValue("q")),    //²éÑ¯µÄQÖµ
+    q: decodeURI(getValue("q")),    //æŸ¥è¯¢çš„Qå€¼
     pf: getValue("pf") || 0,                          
     scid: getValue("scid") || 1,
     max: getValue("max") || 100,
@@ -33,8 +33,8 @@ function ChangeUrl() {
     var url = window.location.pathname + "?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + request.conv + "&width=" +request.width+"&height=" + request.height;
     window.location.href = url;
 }
-//¶ÔÆğÊ¼ºÍÖÕÖ¹Ê±¼äµÄ´¦Àí
-// URL¹ıÂË¹æÔò
+//å¯¹èµ·å§‹å’Œç»ˆæ­¢æ—¶é—´çš„å¤„ç†
+// URLè¿‡æ»¤è§„åˆ™
 function filter(obj) {
     var param = {};
     for (var key in obj) {
@@ -81,7 +81,7 @@ function setiFrame(){
     $("iframe").width(request.width);
     $("iframe").height(request.height);
 }
-// µã»÷°´Å¥¼àÌı£¬½«input Öµ´«Èëurl¸üĞÂ²¢Ë¢ĞÂ
+// ç‚¹å‡»æŒ‰é’®ç›‘å¬ï¼Œå°†input å€¼ä¼ å…¥urlæ›´æ–°å¹¶åˆ·æ–°
 function urlChange() {
     request.q = $("#search").val();
     request.max = document.getElementById('max').value;
@@ -107,7 +107,7 @@ function SizeChange(){
     document.getElementById('begin').value = getValue('start');
     document.getElementById('end').value = getValue('end');
 }
-//Æ½Ì¨¸ü¸Ä
+//å¹³å°æ›´æ”¹
 function platform() {
     var url = window.location.pathname;
     $("#pc").click(function () {
@@ -125,13 +125,13 @@ function platform() {
 }
 platform();
 //start = 2018 - 01 - 16 & end=2018 - 01 - 17
-// ÕıÔÚÔØÈë¶¯»­   
+// æ­£åœ¨è½½å…¥åŠ¨ç”»   
 function hideLoading() {
     document.getElementById("iframe").height = 0;
     document.getElementById("iframe").height = document.getElementById("iframe").contentWindow.document.body.scrollHeight;
     document.getElementById("content_loading").style.display = "none";
 }
-//²»Í¬Æ½Ì¨¼ÓÔØ²»Í¬µÄÒ³Ãæ
+//ä¸åŒå¹³å°åŠ è½½ä¸åŒçš„é¡µé¢
 function load() {
     var pf = getValue("pf");
     var scid = getValue("scid");
@@ -158,7 +158,7 @@ var windowHeght = $(window).height();
 function loadClickRatio() {
     request.top = $(document).scrollTop();
  //   console.log("request:" + JSON.stringify(request));
-    var url = "https://sou.api.autohome.com.cn/webapi/mrec/GetClickRatio";
+    var url = "";
 
     $.ajax({
         type: "GET",
@@ -169,8 +169,8 @@ function loadClickRatio() {
         jsonpCallback: "jsonhandle",
         success: function (data) {
             var rs = data.result.data;
-            $("#vis_info").text("µÚ:" + ((($(document).scrollTop() + 0.0 + windowHeght) /windowHeght).toFixed(2)) +
-                "Ò³,ËÑË÷:" + rs[0].Count + ",µã»÷:" + rs[0].ClickCount + ",µã»÷Õ¼±È:" + (rs[0].ClickRatio * 100).toFixed(0) + "%");
+            $("#vis_info").text("ç¬¬:" + ((($(document).scrollTop() + 0.0 + windowHeght) /windowHeght).toFixed(2)) +
+                "é¡µ,æœç´¢:" + rs[0].Count + ",ç‚¹å‡»:" + rs[0].ClickCount + ",ç‚¹å‡»å æ¯”:" + (rs[0].ClickRatio * 100).toFixed(0) + "%");
             drawBarChart();
         },
         error: function (e) {
@@ -185,9 +185,9 @@ $("#S_change").click(function(){
 $("#S_Mode").click(function(){
     S_Mode();
 })
-//¼àÌı
-//Òş²Ø
-// ËÄ¸öÑ¡Ïî¿¨
+//ç›‘å¬
+//éšè—
+// å››ä¸ªé€‰é¡¹å¡
 function S_search(params) {
     $("#box1").slideToggle("slow");
     $("#box4").hide();
@@ -208,14 +208,14 @@ function iframeer() {
     ifm.height = document.documentElement.clientHeight;
 }
 
-//¼àÌı¹ö¶¯ÊÂ¼ş
+//ç›‘å¬æ»šåŠ¨äº‹ä»¶
 $(function () {
     loadClickRatio();
     $(window).scroll(function () {
         loadClickRatio();
     });
 });
-//¼àÌı¹ö¶¯Ìõ
+//ç›‘å¬æ»šåŠ¨æ¡
 $("#max")[0].onmousemove = function() {
     $("#maxValue")[0].innerHTML = this.value;
     request.max = this.value;
@@ -230,8 +230,7 @@ var resultHeatmap = {
 setTimeout(heatmapAjax, 1000);
 var count =10;
 function heatmapAjax(){
-    var url = "https://sou.api.autohome.com.cn/webapi/mrec/GetClickXYForSearch" + location.search + "&width=" +
-    $(window).width() + "&height=" + $(window).height();
+    var url = "
     jQuery.ajax({
     type: "GET",
     url: url,
@@ -272,15 +271,14 @@ var CropBoxFirstShowLock = true;
                         q: decodeURI(getValue("q")),
                         pf: getValue("pf") || 0,
                         scid: getValue("scid") || 1,
-                        top: parseInt(e.x),  //²»Ö§³ÖĞ¡ÊıÎóÉ¾
+                        top: parseInt(e.x),  //ä¸æ”¯æŒå°æ•°è¯¯åˆ 
                         left: parseInt(e.y),
                         width: $(window).width(),
                         height: $(window).height(),
                         right: e.y + e.width,
                         bottom: e.x + e.height 
                     };
-                        var url = "https://sou.api.autohome.com.cn/webapi/mrec/GetZoneClickInfo?" + r(params);
-                        jQuery.ajax({
+                        var url =              jQuery.ajax({
                         type: "GET",
                         url: url,
                         timeout: 3e3,
@@ -289,8 +287,8 @@ var CropBoxFirstShowLock = true;
                         jsonpCallback: "jsonhandle",
                         success: function (data) {
                             var d = data.result.data;
-                            $("#vis_info").text("ÇøÓòµã»÷ĞÅÏ¢£¬ËÑË÷£º" + d[0].Count + ",µã»÷:" + d[0].ClickCount +
-                                ",µã»÷Õ¼±È:" + (d[0].ClickRatio * 100).toFixed(0) + "%");
+                            $("#vis_info").text("åŒºåŸŸç‚¹å‡»ä¿¡æ¯ï¼Œæœç´¢ï¼š" + d[0].Count + ",ç‚¹å‡»:" + d[0].ClickCount +
+                                ",ç‚¹å‡»å æ¯”:" + (d[0].ClickRatio * 100).toFixed(0) + "%");
                                 state = false;
                         },
                         error: function (e) {
