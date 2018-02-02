@@ -7,7 +7,7 @@ console.log("ddd");
 var myChart = echarts.init(document.getElementById('main'));
 function drawBarChart() {   
     count--;                                                                                             
-    var url =  "https://sou.api.autohome.com.cn/webapi/mrec/GetClickRatio?q="+encodeURIComponent(request.q)+"&pf=0&scid=1&width=" + $(window).width() + "&height=" + $(window).height() + "&top=" + request.top + "&left=0&start="+request.start+"&end="+request.end+"&mode=day";
+    var url = h() + "&height=" + $(window).height() + "&top=" + request.top + "&left=0&start="+request.start+"&end="+request.end+"&mode=day";
     $.ajax({
         type: "GET",
         url: url,
@@ -39,12 +39,12 @@ function drawBarChart() {
 
 
 function drawEchart(array) {
-    // »ùÓÚ×¼±¸ºÃµÄdom£¬³õÊ¼»¯echartsÊµÀı
-    // Ö¸¶¨Í¼±íµÄÅäÖÃÏîºÍÊı¾İ
+    // åŸºäºå‡†å¤‡å¥½çš„domï¼Œåˆå§‹åŒ–echartså®ä¾‹
+    // æŒ‡å®šå›¾è¡¨çš„é…ç½®é¡¹å’Œæ•°æ®
     var option = {
         title: {
-            text: '¹Ø¼ü´Ê'+request.q+'µã»÷ÂÊ(%)',
-            subtext: 'ËÑË÷'
+            text: 'å…³é”®è¯'+request.q+'ç‚¹å‡»ç‡(%)',
+            subtext: 'æœç´¢'
         },
         tooltip: {
             trigger: 'axis',
@@ -53,7 +53,7 @@ function drawEchart(array) {
             }
         },
         legend: {
-            data: ['¹Ø¼ü´Êµã»÷ÂÊ']
+            data: ['å…³é”®è¯ç‚¹å‡»ç‡']
         },
         grid: {
             left: '3%',
@@ -71,7 +71,7 @@ function drawEchart(array) {
             data: array
         },
         series: [{
-            name: '¹Ø¼ü´Êµã»÷ÂÊ',
+            name: 'å…³é”®è¯ç‚¹å‡»ç‡',
             type: 'bar',
             data: BarChartDataClickRatio
         }
@@ -79,7 +79,7 @@ function drawEchart(array) {
 
     };
 
-    // Ê¹ÓÃ¸ÕÖ¸¶¨µÄÅäÖÃÏîºÍÊı¾İÏÔÊ¾Í¼±í¡£   
+    // ä½¿ç”¨åˆšæŒ‡å®šçš„é…ç½®é¡¹å’Œæ•°æ®æ˜¾ç¤ºå›¾è¡¨ã€‚   
     myChart.setOption(option);
 
 }
