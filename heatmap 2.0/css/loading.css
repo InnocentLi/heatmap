@@ -1,0 +1,13 @@
+#heatmapLoading{
+    position: absolute;
+    z-index: 200;
+    display: block;
+    margin-top: 40px;
+    width: 100px;
+    height: 13px;
+    border: 1px solid black;
+    background: black;
+    opacity: 0.8;
+    color: white;
+    font-size: 8px;
+}

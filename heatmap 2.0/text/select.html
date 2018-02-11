@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=" utf-8">
+<meta name="author" content="http://www.softwhy.com/" />
+<title>text</title>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+</head> 
+<body> 
+<form> 
+<select name="area" id="area"> 
+</select> 
+</form> 
+
+<script type="text/javascript"> 
+    var url = "https://sou.api.autohome.com.cn/webapi/mrec/GetWStat?q=%E5%AE%9D%E9%A9%AC&pf=0&scid=1&start=2018-01-25&end=2018-01-30"
+    jQuery.ajax({
+        type: "GET",
+        url: url,
+        timeout: 3e3,
+        dataType: "jsonp",
+        jsonp: "_callback",
+        jsonpCallback: "jsonhandle",
+        success: function (data) {
+            var d = data.result.data;
+            setFun(d);
+           // a();
+        },
+        error: function (e) {
+           
+        }});
+    
+    function setFun(id){ 
+      var select = document.getElementById("area"); 
+      //select.length = 1;
+      //select.options[0].selected = true;
+      for(var x = 0;x<id.length;x++){ 
+        var option = document.createElement("option"); 
+        option.setAttribute("value",id[x].Width);
+        option.appendChild(document.createTextNode(id[x].Width)); 
+        select.appendChild(option);
+      } 
+    }
+            $("#area").change(function(){
+                  console.log($(this).val());
+        });
+    </script>
+</body> 
+</html>

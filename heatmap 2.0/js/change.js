@@ -1,11 +1,18 @@
-// utf-8
-//ç›‘å¬search inputæŒ‰é’®
-    $("#search").change(function(){
-        request.q = $("#search").val();
+"use strict";
+// gb2312
+//¼àÌısearch input°´Å¥
+function set(){
+    REload();
+    loadClickRatio();
+    urliframeChangeAjax();
+    // heatmapAjax();
+}
+$("#search").change(function(){
+        request.q = encodeURIComponent($("#search").val());
         history.pushState("","",window.location.pathname+"?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + request.conv + "&width=" +request.width+"&height=" + request.height)
-      ChangeUrl(); 
-    });   
-//ç›‘å¬æ˜¯å¦å¯ç”¨è½¬æ¢
+        set();
+});   
+//¼àÌıÊÇ·ñÆôÓÃ×ª»»
    $("#convCheckBox").change(function(){
      if(document.getElementById("convCheckBox").checked == true){
         history.pushState("","",window.location.pathname+"?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + "true" + "&width=" +request.width+"&height=" + request.height)
@@ -15,27 +22,41 @@
         history.pushState("","",window.location.pathname+"?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + "false" + "&width=" +request.width+"&height=" + request.height)
         request.conv = false;
      }
-       ChangeUrl();
+     heatmapAjax();
    })
-//ç›‘å¬size å€¼
+//¼àÌısize Öµ
 $("#size").change(function(){
     request.size = $("#size").val();
     history.pushState("","",window.location.pathname+"?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + request.conv + "&width=" +request.width+"&height=" + request.height)
-    ChangeUrl(); 
+    heatmapAjax();
 });
  
-//start å¼€å§‹
-
+//start ¿ªÊ¼
 $("#begin").change(function(){
     request.start = $("#begin").val();
     history.pushState("","",window.location.pathname+"?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + request.conv + "&width=" +request.width+"&height=" + request.height)
-    ChangeUrl(); 
+    heatmapAjax();
 });
-
-// end ç»“æŸ
+// end ½áÊø
 $("#end").change(function(){
     request.end = $("#end").val();
     history.pushState("","",window.location.pathname+"?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + request.conv + "&width=" +request.width+"&height=" + request.height)
-    ChangeUrl(); 
+    heatmapAjax();
 });
- 
+//¼àÌı¹ö¶¯Ìõ
+//max ½ø¶ÈÌõ¸ü¸Ä
+    $("#max")[0].onmousemove = function() {
+        $("#maxValue")[0].innerHTML = this.value;
+        request.max = this.value;
+        history.pushState("","",window.location.pathname+"?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" +this.value + "&conv=" + request.conv + "&width=" +request.width+"&height=" + request.height)
+        resultHeatmap.max = request.max; 
+        drawHeapmap();
+    }   
+//area Ñ¡Ïî¿¨¸ü¸Ä
+$("#area").change(function(){
+    let value =$(this).val();
+    history.pushState("","",window.location.pathname+"?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + request.conv + "&width=" +$(this).val()+"&height=" + request.height)
+    document.getElementById("content_frame").width = value;
+    heatmapAjax();
+    loadClickRatio();
+});

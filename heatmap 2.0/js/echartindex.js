@@ -1,50 +1,49 @@
-var BarChartData;
-var BarChartDataClickRatio = [];
-var count = 3;
-
-console.log("ddd");
-// gb2312   
-var myChart = echarts.init(document.getElementById('main'));
-function drawBarChart() {   
-    count--;                                                                                             
-    var url = h() + "&height=" + $(window).height() + "&top=" + request.top + "&left=0&start="+request.start+"&end="+request.end+"&mode=day";
+"use strict";
+// gb2312()
+let BarChartData;
+let BarChartDataClickRatio;
+let BarChartDataDate;
+let countBar = 3;
+let myChart = echarts.init(document.getElementById('main'));
+function drawBarChart(){                                                                                              
+    let drawBarurl =  "https://sou.api.autohome.com.cn/webapi/mrec/GetClickRatio?q="+request.q+"&pf=0&scid=1&width=" + $(window).width() + "&height=" + $(window)[0].innerHeight + "&top=" + request.top + "&left=0&start="+request.start+"&end="+request.end+"&mode=day";
     $.ajax({
         type: "GET",
-        url: url,
+        url: drawBarurl,
         dataType: "jsonp",
         jsonp: "_callback",
-        jsonpCallback: "jsonhandle",
         success: function (data) {
-
             BarChartData = data.result.data;
-            var BarChartDataDate = [];
-            for (var i = 0; i < BarChartData.length; i++) {
+             BarChartDataDate = [];
+             BarChartDataClickRatio = [];
+            for (let i = 0; i < BarChartData.length; i++) {
                 BarChartDataDate.push(BarChartData[i].date);
-                BarChartDataClickRatio[i] = (BarChartData[i].ClickRatio * 100);
-
+                BarChartDataClickRatio.push(BarChartData[i].ClickRatio * 100);
             }
             if (BarChartDataDate[0]) {
                 drawEchart(BarChartDataDate);
             }
+            console.log("ÌõÐÎÍ¼success");
         },
         error: function (e) {
-            if(count){
-                drawBarChart();
+            countBar--;  
+            if(countBar){
+                setTimeout(drawBarChart,100)
             }
+            console.log("ÌõÐÎÍ¼error");
         }
     });
-
-
 }
 
 
+
 function drawEchart(array) {
-    // åŸºäºŽå‡†å¤‡å¥½çš„domï¼Œåˆå§‹åŒ–echartså®žä¾‹
-    // æŒ‡å®šå›¾è¡¨çš„é…ç½®é¡¹å’Œæ•°æ®
-    var option = {
-        title: {
-            text: 'å…³é”®è¯'+request.q+'ç‚¹å‡»çŽ‡(%)',
-            subtext: 'æœç´¢'
+    // »ùÓÚ×¼±¸ºÃµÄdom£¬³õÊ¼»¯echartsÊµÀý
+    // Ö¸¶¨Í¼±íµÄÅäÖÃÏîºÍÊý¾Ý
+    let option = {
+        title: {     
+            text: '¹Ø¼ü´Ê'+decodeURIComponent(request.q)+'µã»÷ÂÊ(%)',
+            subtext: 'ËÑË÷'
         },
         tooltip: {
             trigger: 'axis',
@@ -53,7 +52,7 @@ function drawEchart(array) {
             }
         },
         legend: {
-            data: ['å…³é”®è¯ç‚¹å‡»çŽ‡']
+            data: ['¹Ø¼ü´Êµã»÷ÂÊ']
         },
         grid: {
             left: '3%',
@@ -71,15 +70,12 @@ function drawEchart(array) {
             data: array
         },
         series: [{
-            name: 'å…³é”®è¯ç‚¹å‡»çŽ‡',
+            name: '¹Ø¼ü´Êµã»÷ÂÊ',
             type: 'bar',
             data: BarChartDataClickRatio
         }
         ]
-
     };
-
-    // ä½¿ç”¨åˆšæŒ‡å®šçš„é…ç½®é¡¹å’Œæ•°æ®æ˜¾ç¤ºå›¾è¡¨ã€‚   
+    // Ê¹ÓÃ¸ÕÖ¸¶¨µÄÅäÖÃÏîºÍÊý¾ÝÏÔÊ¾Í¼±í¡£   
     myChart.setOption(option);
-
-}
+}    

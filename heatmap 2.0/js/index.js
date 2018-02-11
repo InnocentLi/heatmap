@@ -1,121 +1,53 @@
-// please use GB2312 NOT UTF-8   9304893@qq.com
-// urlå–å€¼  
+"use strict";
+//  UTF-8   9304893@qq.com
+// urlÈ¡Öµ  
 SizeChange();
-function getValue(parm) {
-    var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
-    var r = location.href.substr(location.href.indexOf("\?") + 1).match(reg);
-    if (r != null) return r[2];
-    return null;
-}
-//è®°å½•æ–¹å—ä½ç½®
-// url 
-var request = {
-    q: decodeURI(getValue("q")),    //æŸ¥è¯¢çš„Qå€¼
-    pf: getValue("pf") || 0,                          
-    scid: getValue("scid") || 1,
-    max: getValue("max") || 100,
-    min: getValue("min") || 1,
-    size:getValue("size")||10000,
-    start: getValue("start")||"",
-    end: getValue("end")||"",
-    height: $(window).height()||"",
-    width: $(window).width()||"",
-    top: getValue("top")||0,  
-    left: getValue("left")||"",
-    right: getValue("right")||"",
-    bottom: getValue("bottom")||"",
-    mode:getValue("mode")||"",
-    conv:getValue("conv")||true
-};
+//¼ÇÂ¼·½¿éÎ»ÖÃ
+// url
+set();
+
 function ChangeUrl() {
-    var search = encodeURIComponent(request.q);
-    request.q = search; 
-    var url = window.location.pathname + "?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + request.conv + "&width=" +request.width+"&height=" + request.height;
+    let url = window.location.pathname + "?q=" + request.q + "&start=" + request.start + "&end=" + request.end + "&size=" + request.size + "&pf=" + request.pf + "&max=" + request.max + "&conv=" + request.conv + "&width=" +request.width+"&height=" + request.height;
     window.location.href = url;
 }
-//å¯¹èµ·å§‹å’Œç»ˆæ­¢æ—¶é—´çš„å¤„ç†
-// URLè¿‡æ»¤è§„åˆ™
-function filter(obj) {
-    var param = {};
-    for (var key in obj) {
-        if (obj[key] !== null && obj[key] !== undefined && obj[key] !== "null" && obj[key] !== "" && obj[key] !== "undefined") {
-            param[key] = obj[key];
-        }
-    }
-    return param;
-}
-var NowTime;
-function SetTimer(){
-    Date.prototype.toDateInputValue = (function() {
-        var now =  new Date().setUTCHours(-23)
-        var local = new Date(now);
-        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-        return local.toJSON().slice(0,10);
-    });
-     NowTime = new Date().toDateInputValue();
-     Timer();
-    }
-    SetTimer();
-function Timer(){   
-    if(getValue("start")==""||null){
-        document.getElementById('begin').value = NowTime;
-    }
-    if(getValue("end")==""||null){
-        document.getElementById('end').value = NowTime;
-    }
-}
-function set(){
-     if($("#iframeWidth").val()==""||$("#iframeHeight").val()==""){
-          console.log(request.width,request.height);
-        ChangeUrl();
-    }else{
-        ChangeUrl();
-    }
-}
-//setiFrame();
-function setiFrame(){
-    $("#iframeWidth").val(getValue("width"));
-    $("#iframeHeight").val(getValue("height"));
-    request.width = $("#iframeWidth").val();
-    request.height = $("#iframeHeight").val();
-    $("iframe").width(request.width);
-    $("iframe").height(request.height);
-}
-// ç‚¹å‡»æŒ‰é’®ç›‘å¬ï¼Œå°†input å€¼ä¼ å…¥urlæ›´æ–°å¹¶åˆ·æ–°
+//¶ÔÆğÊ¼ºÍÖÕÖ¹Ê±¼äµÄ´¦Àí
+// µã»÷°´Å¥¼àÌı£¬½«input Öµ´«Èëurl¸üĞÂ²¢Ë¢ĞÂ
 function urlChange() {
     request.q = $("#search").val();
     request.max = document.getElementById('max').value;
     request.size = $("#size").val();
     request.start = $("#begin").val();
     request.end = $("#end").val();
-    var conv = document.getElementById("convCheckBox");
+    let conv = document.getElementById("convCheckBox");
     request.conv = conv.checked;
     // search = encodeURIComponent(search);
     // request.q = search;
     ChangeUrl();
 }
+
 function SizeChange(){
-    document.getElementById('max').value = getValue('max');
-    if( getValue('conv') == "false"){
-        document.getElementById("convCheckBox").checked = false;
-    }
-    else{
-        document.getElementById("convCheckBox").checked = true;
-    }   
-    document.getElementById('size').value = getValue('size');
-    document.getElementById('search').value = decodeURI(getValue("q"));
-    document.getElementById('begin').value = getValue('start');
-    document.getElementById('end').value = getValue('end');
+        document.getElementById('search').value = decodeURIComponent(getValue('q'));
+        // document.getElementById('max').value = getValue('max');
+        if(getValue('conv') == "false"){
+            document.getElementById("convCheckBox").checked = false;
+        }
+        else{
+            document.getElementById("convCheckBox").checked = true;
+        }
+           
+        document.getElementById('size').value = getValue('size');
+        document.getElementById('begin').value = getValue('start');
+        document.getElementById('end').value = getValue('end');
 }
-//å¹³å°æ›´æ”¹
+//Æ½Ì¨¸ü¸Ä
 function platform() {
-    var url = window.location.pathname;
+    let url = window.location.pathname;
     $("#pc").click(function () {
           request.pf = 0;
           ChangeUrl();
     })
     $("#phone").click(function () {
-          request.pf = 1;
+           request.pf = 1;
            ChangeUrl();
     })
     $("#app").click(function () {
@@ -123,184 +55,49 @@ function platform() {
            ChangeUrl();
     })
 }
+
 platform();
 //start = 2018 - 01 - 16 & end=2018 - 01 - 17
-// æ­£åœ¨è½½å…¥åŠ¨ç”»   
+// ÕıÔÚÔØÈë¶¯»­   
 function hideLoading() {
     document.getElementById("iframe").height = 0;
     document.getElementById("iframe").height = document.getElementById("iframe").contentWindow.document.body.scrollHeight;
     document.getElementById("content_loading").style.display = "none";
 }
-//ä¸åŒå¹³å°åŠ è½½ä¸åŒçš„é¡µé¢
-function load() {
-    var pf = getValue("pf");
-    var scid = getValue("scid");
-    if (pf == undefined || pf == null)
-        document.getElementById("content_frame").src = "https://sou.autohome.com.cn/zonghe?q=" + decodeURI(
-            getValue("q"));
-    else if (pf == "1")
-        document.getElementById("content_frame").src = "https://sou.m.autohome.com.cn/zonghe?pq=&type=zonghe&q=" +
-        getValue("q");
-    else if (pf == "3")
-        document.getElementById("content_frame").src = "https://sou.m.autohome.com.cn/h5/2.2/search.html#/0?q=" +
-        getValue("q");
-    else
-        document.getElementById("content_frame").src = "https://sou.autohome.com.cn/zonghe?q=" + decodeURI(
-            getValue("q"));
-}
-function r(a) {
-    var n = "";
-    for (s in a)
-        n += s + "=" + encodeURIComponent(a[s]) + "&";
-    return n
-}
-var windowHeght = $(window).height();
-function loadClickRatio() {
-    request.top = $(document).scrollTop();
- //   console.log("request:" + JSON.stringify(request));
-    var url = "";
+//²»Í¬Æ½Ì¨¼ÓÔØ²»Í¬µÄÒ³Ãæ
 
-    $.ajax({
-        type: "GET",
-        url: url + "?" + r(request),
-        timeout: 3e3,
-        dataType: "jsonp",
-        jsonp: "_callback",
-        jsonpCallback: "jsonhandle",
-        success: function (data) {
-            var rs = data.result.data;
-            $("#vis_info").text("ç¬¬:" + ((($(document).scrollTop() + 0.0 + windowHeght) /windowHeght).toFixed(2)) +
-                "é¡µ,æœç´¢:" + rs[0].Count + ",ç‚¹å‡»:" + rs[0].ClickCount + ",ç‚¹å‡»å æ¯”:" + (rs[0].ClickRatio * 100).toFixed(0) + "%");
-            drawBarChart();
-        },
-        error: function (e) {
-            console.log("exception:" + e);
-        }
-    });
-}
 $("#S_change").click(function(){
     cropperWindow();
-    var CropBoxFirstShowLock = false; 
+    CropBoxFirstShowLock = false; 
 })
+
 $("#S_Mode").click(function(){
     S_Mode();
 })
-//ç›‘å¬
-//éšè—
-// å››ä¸ªé€‰é¡¹å¡
+//¼àÌı
+//Òş²Ø
+// ËÄ¸öÑ¡Ïî¿¨
 function S_search(params) {
-    $("#box1").slideToggle("slow");
+    $("#box1").show();
     $("#box4").hide();
 };
-
 function S_vev() {
     $("#box1").hide();
     $("#box4").hide();
-}
-
+};
 function S_Mode(s) {
-    $("#box4").slideToggle("slow");
+    $("#box4").show();
     $("#box1").hide();
-}
-var lock = false;
+};
+let lock = false;
 function iframeer() {
-    var ifm = document.getElementById("content_frame");
+    let ifm = document.getElementById("content_frame");
     ifm.height = document.documentElement.clientHeight;
 }
-
-//ç›‘å¬æ»šåŠ¨äº‹ä»¶
+//¼àÌı¹ö¶¯ÊÂ¼ş
 $(function () {
     loadClickRatio();
     $(window).scroll(function () {
         loadClickRatio();
     });
 });
-//ç›‘å¬æ»šåŠ¨æ¡
-$("#max")[0].onmousemove = function() {
-    $("#maxValue")[0].innerHTML = this.value;
-    request.max = this.value;
-    resultHeatmap.max = request.max; 
-    drawHeapmap();
-}
-var resultHeatmap = {
-    max: request.max,
-    min: request.min,
-    data: []
-};
-setTimeout(heatmapAjax, 1000);
-var count =10;
-function heatmapAjax(){
-    var url = "
-    jQuery.ajax({
-    type: "GET",
-    url: url,
-    timeout: 3e3,
-    dataType: "jsonp",
-    jsonp: "_callback",
-    jsonpCallback: "jsonhandle",
-    success: function (data) {
-        resultHeatmap.data = data.result.data;
-        document.getElementById("loading").style.display = "none";          
-    },
-    error: function (e) {
-        if(count){
-            heatmapAjax();
-            count--;
-        } 
-        console.log(e); 
-    }
-});
-}
-var heatmapInstance = h337.create({
-    container: document.getElementById('content')   
-});
-function drawHeapmap() {
-    heatmapInstance.setData(resultHeatmap);
-}; 
-setTimeout(drawHeapmap, 2500);
-var cropperWindowLock = true;   
-var CropBoxFirstShowLock = true;
-    function cropperWindow(){ 
-        if(cropperWindowLock){
-            $('.heatmap-canvas').cropper({
-                zoomable:false,
-                background:false,  
-                autoCropArea:0.1,
-                crop: function(e) {
-                    var params = {
-                        q: decodeURI(getValue("q")),
-                        pf: getValue("pf") || 0,
-                        scid: getValue("scid") || 1,
-                        top: parseInt(e.x),  //ä¸æ”¯æŒå°æ•°è¯¯åˆ 
-                        left: parseInt(e.y),
-                        width: $(window).width(),
-                        height: $(window).height(),
-                        right: e.y + e.width,
-                        bottom: e.x + e.height 
-                    };
-                        var url =              jQuery.ajax({
-                        type: "GET",
-                        url: url,
-                        timeout: 3e3,
-                        dataType: "jsonp",
-                        jsonp: "_callback",
-                        jsonpCallback: "jsonhandle",
-                        success: function (data) {
-                            var d = data.result.data;
-                            $("#vis_info").text("åŒºåŸŸç‚¹å‡»ä¿¡æ¯ï¼Œæœç´¢ï¼š" + d[0].Count + ",ç‚¹å‡»:" + d[0].ClickCount +
-                                ",ç‚¹å‡»å æ¯”:" + (d[0].ClickRatio * 100).toFixed(0) + "%");
-                                state = false;
-                        },
-                        error: function (e) {
-                           
-                            state = false;
-                        }});
-                  }   
-            });
-            cropperWindowLock=!cropperWindowLock;
-        }
-        else {
-            $('.heatmap-canvas').cropper("destroy");
-            cropperWindowLock=!cropperWindowLock;
-        }
-    }
